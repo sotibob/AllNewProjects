@@ -24,6 +24,11 @@ public class StudentController {
         return studentService.selectStudentByIdWithCourses(id);
     }
 
+    @GetMapping("/email/{email}")
+    public ResponseTemplate selectStudentByEmailWithCourses(@PathVariable("email") String email) {
+        return studentService.selectStudentByEmailWithCourses(email);
+    }
+
     @PostMapping("/add")
     public Student addStudent(@RequestBody Student student) {
         return studentService.addStudent(student);

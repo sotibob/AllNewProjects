@@ -19,10 +19,11 @@ public class Student {
     private String firstName;
     private String lastName;
     private String studentDOB;
+    private String email;
     private String street;
     private String city;
     private String state;
-    private String ZIP;
+    private Integer zip;
     @ElementCollection
     private List<Integer> classIds;
 }

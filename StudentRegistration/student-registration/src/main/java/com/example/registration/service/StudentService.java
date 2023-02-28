@@ -27,7 +27,7 @@ public class StudentService {
             List<Course> courses = new ArrayList<Course>();
             Student stu = studentRepo.findByStudentId(s.get(0).getStudentId());
             for(Integer t : stu.getClassIds()) {
-                Course c = restTemplate.getForObject("http://COURSE-SERVICE/courses/" + t, Course.class);
+                Course c = restTemplate.getForObject("http://localhost:9100/courses/" + t, Course.class);
                 courses.add(c);
             }
 
@@ -43,7 +43,20 @@ public class StudentService {
         List<Course> courses = new ArrayList<Course>();
         Student stu = studentRepo.findByStudentId(id);
         for(Integer t : stu.getClassIds()) {
-            Course c = restTemplate.getForObject("http://COURSE-SERVICE/courses/" + t, Course.class);
+            Course c = restTemplate.getForObject("http://localhost:9100/courses/" + t, Course.class);
+            courses.add(c);
+        }
+        vo.setStudent(stu);
+        vo.setCourses(courses);
+        return vo;
+    }
+
+    public ResponseTemplate selectStudentByEmailWithCourses(String email) {
+        ResponseTemplate vo = new ResponseTemplate();
+        List<Course> courses = new ArrayList<Course>();
+        Student stu = studentRepo.findByEmail(email);
+        for(Integer t : stu.getClassIds()) {
+            Course c = restTemplate.getForObject("http://localhost:9100/courses/" + t, Course.class);
             courses.add(c);
         }
         vo.setStudent(stu);
@@ -74,6 +87,9 @@ public class StudentService {
         if((student.getStudentDOB() != null) && (student.getStudentDOB() != s.getStudentDOB())){
             s.setStudentDOB(student.getStudentDOB());
         }
+        if((student.getEmail() != null) && (student.getEmail() != s.getEmail())){
+            s.setEmail(student.getEmail());
+        }
         if((student.getStreet() != null) && (student.getStreet() != s.getStreet())){
             s.setStreet(student.getStreet());
         }
@@ -83,8 +99,8 @@ public class StudentService {
         if((student.getState() != null) && (student.getState() != s.getState())){
             s.setState(student.getState());
         }
-        if((student.getZIP() != null) && (student.getZIP() != s.getZIP())){
-            s.setZIP(student.getZIP());
+        if((student.getZip() != null) && (student.getZip() != s.getZip())){
+            s.setZip(student.getZip());
         }
         if((student.getClassIds() != null) && (student.getClassIds() != s.getClassIds())){
             s.setClassIds(student.getClassIds());

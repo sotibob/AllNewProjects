@@ -14,7 +14,7 @@ public class Course {
     @Id
     private int classId;
     private String className;
-    private String creditHours;
+    private Integer creditHours;
     private String dateTime;
     private String classProfessor;
     private String classLocation;
